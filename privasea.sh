@@ -3,12 +3,12 @@ echo "   ______ _____   ___  ____  __________  __ ____  _____ "
 echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
-echo "               - PRIVASEA NODE -                        "
+echo "               SUBSCRIBE MY CHANNEL                     "
 sleep 3
 
 # Meminta input dari pengguna sebelum proses pengaturan dimulai
 echo "Membuat folder privasea/config..."
-sudo mkdir -p ~/privasea/config
+mkdir -p ~/privasea/config
 echo "Folder privasea/config berhasil dibuat."
 
 echo "Masukkan informasi keystore baru..."
