@@ -8,6 +8,8 @@ echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
 echo "               SUBSCRIBE MY CHANNEL                     "
 sleep 2  # Delay 2 detik
 
+rm -fr privasea
+sleep 3
 # Meminta input dari pengguna untuk KEYSTORE_PASSWORD
 echo "Masukkan KEYSTORE_PASSWORD Anda:"
 read -s KEYSTORE_PASSWORD  # -s untuk menyembunyikan input password
