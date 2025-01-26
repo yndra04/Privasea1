@@ -3,8 +3,44 @@ echo "   ______ _____   ___  ____  __________  __ ____  _____ "
 echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
-echo "               SUBSCRIBE MY CHANNEL                     "
+echo "               - PRIVASEA NODE -                        "
 sleep 3
+
+# Meminta input dari pengguna sebelum proses pengaturan dimulai
+echo "Membuat folder privasea/config..."
+sudo mkdir -p ~/privasea/config
+echo "Folder privasea/config berhasil dibuat."
+
+echo "Masukkan informasi keystore baru..."
+echo "Masukkan password untuk keystore: "
+read -sp "Password: " KEYSTORE_PASSWORD
+echo
+
+if [ -z "$KEYSTORE_PASSWORD" ]; then
+    echo "Error: Password tidak boleh kosong!"
+    exit 1
+fi
+
+echo "Masukkan isi untuk wallet_keystore.json (sebagai JSON):"
+echo "Contoh format: {\"address\": \"your-address\", \"key\": \"your-key\"}"
+echo "Masukkan informasi keystore:"
+read -p "Masukkan JSON: " KEYS_CONTENT
+echo
+
+if [ -z "$KEYS_CONTENT" ]; then
+    echo "Error: JSON keystore tidak boleh kosong!"
+    exit 1
+fi
+
+# Menyimpan JSON ke dalam file keystore di direktori ~/privasea/config
+echo "$KEYS_CONTENT" > ~/privasea/config/wallet_keystore
+echo "Keystore berhasil dibuat dan disimpan di ~/privasea/config/wallet_keystore"
+
+# Menyimpan password keystore di direktori ~/privasea/config
+echo "$KEYSTORE_PASSWORD" > ~/privasea/config/keystore_password.txt
+echo "Password untuk keystore berhasil disimpan di ~/privasea/config/keystore_password.txt"
+
+# Sekarang, kita lanjutkan ke pengaturan Docker dan Privasea
 
 echo "Mengatur Docker dalam rootless mode..."
 sudo apt-get update
@@ -31,39 +67,6 @@ echo "Pulling Privasea Docker image..."
 sudo docker pull privasea/acceleration-node-beta:latest
 echo "Waiting for 20 seconds to ensure the image is pulled properly..."
 sleep 20
-
-echo "Creating Privasea directory..."
-sudo mkdir -p ~/privasea/config
-cd ~/privasea
-
-echo "Masukkan informasi keystore baru..."
-echo "Masukkan password untuk keystore: "
-read -sp "Password: " KEYSTORE_PASSWORD
-echo
-
-if [ -z "$KEYSTORE_PASSWORD" ]; then
-    echo "Error: Password tidak boleh kosong!"
-    exit 1
-fi
-
-echo "Masukkan isi untuk wallet_keystore.json (sebagai JSON):"
-echo "Contoh format: {\"address\": \"your-address\", \"key\": \"your-key\"}"
-echo "Masukkan informasi keystore:"
-read -p "Masukkan JSON: " KEYS_CONTENT
-echo
-
-if [ -z "$KEYS_CONTENT" ]; then
-    echo "Error: JSON keystore tidak boleh kosong!"
-    exit 1
-fi
-
-# Menyimpan JSON ke dalam file keystore
-echo "$KEYS_CONTENT" > wallet_keystore
-echo "Keystore berhasil dibuat dan disimpan dalam wallet_keystore"
-
-# Membuat keystore dengan password dan file keystore
-echo "$KEYSTORE_PASSWORD" > keystore_password.txt
-echo "Password untuk keystore berhasil disimpan dalam keystore_password.txt"
 
 echo "Starting your Privasea Privanetix Node..."
 sudo docker run -d --name privanetix-node -v "$HOME/privasea/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
