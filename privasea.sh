@@ -29,8 +29,8 @@ sudo bash -c "source <(wget -O - https://raw.githubusercontent.com/shareithub/Pr
 
 echo "Pulling Privasea Docker image..."
 sudo docker pull privasea/acceleration-node-beta:latest
-echo "Waiting for 20 seconds to ensure the image is pulled properly..."
-sleep 20
+echo "Waiting for 5 seconds to ensure the image is pulled properly..."
+sleep 5
 
 echo "Creating Privasea directory..."
 sudo mkdir -p ~/privasea/config
@@ -65,16 +65,20 @@ echo "Masukkan password untuk keystore: "
 read -sp "Password: " KEYSTORE_PASSWORD
 echo
 
+if [ -z "$KEYSTORE_PASSWORD" ]; then
+    echo "Error: Password tidak boleh kosong!"
+    exit 1
+fi
+
 echo "Masukkan isi untuk wallet_keystore.json (sebagai JSON):"
 echo "Contoh format: {\"address\": \"your-address\", \"key\": \"your-key\"}"
 echo "Masukkan informasi keystore:"
 read -p "Masukkan JSON: " KEYS_CONTENT
 echo
 
-# Verifikasi bahwa input tidak kosong
-if [ -z "$KEYSTORE_PASSWORD" ] || [ -z "$KEYS_CONTENT" ]; then
-  echo "Error: Password atau JSON keystore tidak boleh kosong!"
-  exit 1
+if [ -z "$KEYS_CONTENT" ]; then
+    echo "Error: JSON keystore tidak boleh kosong!"
+    exit 1
 fi
 
 # Menyimpan JSON ke dalam file keystore
