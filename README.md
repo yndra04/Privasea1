@@ -7,7 +7,7 @@ Minimum spec :
 1. Open your VPS / Local Ubuntu
 2. copy this code :
 ```
-wget https://raw.githubusercontent.com/shareithub/Privasea/refs/heads/main/privasea.sh
+sudo rm -fr privasea.sh && sudo wget https://raw.githubusercontent.com/shareithub/Privasea/refs/heads/main/privasea.sh
 ```
 and copy this :
 ```
