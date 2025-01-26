@@ -5,8 +5,6 @@ echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
 echo "               SUBSCRIBE MY CHANNEL                     "
 
-sleep 10
-
 echo "Selamat datang! Skrip ini akan mengatur Docker untuk Anda."
 echo "Anda dapat memilih antara menggunakan Docker dengan mode rootless atau memberikan akses non-root ke daemon Docker."
 echo "Pilih salah satu opsi berikut:"
