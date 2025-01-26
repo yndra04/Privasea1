@@ -6,21 +6,21 @@ echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
 echo "               SUBSCRIBE MY CHANNEL                     "
 sleep 3
 
-    echo "Mengatur Docker dalam rootless mode..."
-    sudo apt-get update
-    sudo apt-get install -y docker-ce-rootless-extras
-    dockerd-rootless-setuptool.sh install
+echo "Mengatur Docker dalam rootless mode..."
+sudo apt-get update
+sudo apt-get install -y docker-ce-rootless-extras
+dockerd-rootless-setuptool.sh install
 
-    echo "Menambahkan rootless Docker ke PATH Anda."
-    echo "Tambahkan baris berikut ke file .bashrc Anda:"
-    echo "export PATH=\$HOME/bin:\$PATH"
-    echo "Lalu jalankan 'source ~/.bashrc'."
+echo "Menambahkan rootless Docker ke PATH Anda."
+echo "Tambahkan baris berikut ke file .bashrc Anda:"
+echo "export PATH=\$HOME/bin:\$PATH"
+echo "Lalu jalankan 'source ~/.bashrc'."
 
-    echo "export PATH=\$HOME/bin:\$PATH" >> ~/.bashrc
-    source ~/.bashrc
+echo "export PATH=\$HOME/bin:\$PATH" >> ~/.bashrc
+source ~/.bashrc
 
-    echo "Selesaikan setup dengan menjalankan: docker info"
-    echo "Rootless mode berhasil diatur!"
+echo "Selesaikan setup dengan menjalankan: docker info"
+echo "Rootless mode berhasil diatur!"
 
 echo "Melanjutkan ke pengaturan Privasea Privanetix Node..."
 
@@ -63,12 +63,21 @@ sudo rm -fr wallet_keystore
 echo "Masukkan informasi keystore baru..."
 echo "Masukkan password untuk keystore: "
 read -sp "Password: " KEYSTORE_PASSWORD
+echo
 
 echo "Masukkan isi untuk wallet_keystore.json (sebagai JSON):"
 echo "Contoh format: {\"address\": \"your-address\", \"key\": \"your-key\"}"
 echo "Masukkan informasi keystore:"
 read -p "Masukkan JSON: " KEYS_CONTENT
+echo
 
+# Verifikasi bahwa input tidak kosong
+if [ -z "$KEYSTORE_PASSWORD" ] || [ -z "$KEYS_CONTENT" ]; then
+  echo "Error: Password atau JSON keystore tidak boleh kosong!"
+  exit 1
+fi
+
+# Menyimpan JSON ke dalam file keystore
 echo "$KEYS_CONTENT" > wallet_keystore
 echo "Keystore berhasil dibuat dan disimpan dalam wallet_keystore"
 
