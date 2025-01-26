@@ -4,7 +4,7 @@ echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
 echo "               PRIVASEA NODE                            "
-sleep 5
+sleep 3
 
 echo "Mengatur Docker dalam rootless mode..."
 sudo apt-get update
@@ -29,8 +29,8 @@ sudo bash -c "source <(wget -O - https://raw.githubusercontent.com/shareithub/Pr
 
 echo "Pulling Privasea Docker image..."
 sudo docker pull privasea/acceleration-node-beta:latest
-echo "Waiting for 5 seconds to ensure the image is pulled properly..."
-sleep 5
+echo "Waiting for 20 seconds to ensure the image is pulled properly..."
+sleep 20
 
 echo "Creating Privasea directory..."
 sudo mkdir -p ~/privasea/config
@@ -84,6 +84,10 @@ fi
 # Menyimpan JSON ke dalam file keystore
 echo "$KEYS_CONTENT" > wallet_keystore
 echo "Keystore berhasil dibuat dan disimpan dalam wallet_keystore"
+
+# Membuat keystore dengan password dan file keystore
+echo "$KEYSTORE_PASSWORD" > keystore_password.txt
+echo "Password untuk keystore berhasil disimpan dalam keystore_password.txt"
 
 echo "Starting your Privasea Privanetix Node..."
 sudo docker run -d --name privanetix-node -v "$HOME/privasea/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
