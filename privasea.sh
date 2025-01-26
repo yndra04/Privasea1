@@ -5,7 +5,7 @@ echo "   ______ _____   ___  ____  __________  __ ____  _____ "
 echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
-echo "               SUBSCRIBE MY CHANNEL                     "
+echo "              - PRIVASEA NODE -                         "
 sleep 2  # Delay 2 detik
 
 # Update dan upgrade paket menggunakan sudo
