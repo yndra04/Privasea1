@@ -1,49 +1,53 @@
 #!/bin/bash
+
+# Menampilkan teks ASCII dengan pesan
 echo "   ______ _____   ___  ____  __________  __ ____  _____ "
 echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
-echo "               PRIVASEA NODE                            "
-sleep 3
+echo "               SUBSCRIBE MY CHANNEL                     "
+sleep 2  # Delay 2 detik
 
-sudo groupadd docker && sudo usermod -aG docker $(whoami) && newgrp docker
-sleep 5
+# Update dan upgrade paket menggunakan sudo
+echo "Updating and upgrading system packages..."
+sudo apt update && sudo apt upgrade -y
+sleep 3  # Delay 3 detik
 
-source <(wget -O - https://raw.githubusercontent.com/shareithub/Privasea/refs/heads/main/privasea.sh)
-sleep 5
+# Menarik Docker image privasea/acceleration-node-beta:latest menggunakan sudo
+echo "Pulling Docker image privasea/acceleration-node-beta:latest..."
+sudo docker pull privasea/acceleration-node-beta:latest
+sleep 3  # Delay 3 detik
 
-mkdir -p ~/privasea/config && cd ~/privasea
-sleep 5
+# Membuat direktori dan berpindah ke dalam direktori tersebut
+echo "Creating ~/privasea/config directory..."
+sudo mkdir -p ~/privasea/config && cd ~/privasea
+sleep 2  # Delay 2 detik
 
-echo "Masukkan isi wallet_keystore Anda:"
+# Meminta input dari pengguna untuk isi file wallet_keystore
+echo "Please enter the content of wallet_keystore:"
 read wallet_keystore_content
-sleep 5
 
-echo "$wallet_keystore_content" > ~/privasea/config/wallet_keystore
-sleep5
+# Membuat file wallet_keystore dan menulis isi yang dimasukkan oleh pengguna
+echo "$wallet_keystore_content" | sudo tee ~/privasea/config/wallet_keystore > /dev/null
+sleep 2  # Delay 2 detik
 
-echo "File wallet_keystore telah berhasil dibuat di ~/privasea/config"
-sleep 5
+# Meminta input dari pengguna untuk KEYSTORE_PASSWORD
+echo "Please enter your KEYSTORE_PASSWORD:"
+read -s KEYSTORE_PASSWORD  # -s untuk menyembunyikan input password
 
-echo "Menarik Docker image privasea/acceleration-node-beta:latest..."
-docker pull privasea/acceleration-node-beta:latest
+# Menjalankan Docker container dengan KEYSTORE_PASSWORD menggunakan sudo
+echo "Running Docker container privanetix-node..."
+sudo docker run -d --name privanetix-node -v "$HOME/privasea/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
+sleep 3  # Delay 3 detik
 
-echo "Docker image privasea/acceleration-node-beta:latest telah berhasil ditarik."
+# Merestart Docker container privanetix-node menggunakan sudo
+echo "Restarting Docker container privanetix-node..."
+sudo docker restart privanetix-node
+sleep 3  # Delay 3 detik
 
-echo "Masukkan KEYSTORE_PASSWORD Anda:"
-read -s KEYSTORE_PASSWORD  
-sleep 5
-echo "Menjalankan Docker container privanetix-node..."
-docker run -d --name privanetix-node -v "$HOME/privasea/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
-sleep 5
-echo "Docker container privanetix-node telah berhasil dijalankan."
-sleep 5
-echo "Merestart Docker container privanetix-node..."
-docker restart privanetix-node
-sleep 5
-echo "Docker container privanetix-node telah berhasil di-restart."
-sleep 5
-echo "Menampilkan log dari Docker container privanetix-node..."
-docker logs privanetix-node
-sleep 5
-echo "Log dari Docker container privanetix-node telah ditampilkan."
+# Menampilkan log dari Docker container privanetix-node menggunakan sudo
+echo "Displaying logs from Docker container privanetix-node..."
+sudo docker logs privanetix-node
+sleep 3  # Delay 3 detik
+
+echo "All operations are complete."
