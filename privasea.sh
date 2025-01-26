@@ -4,7 +4,7 @@ echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
 echo "               SUBSCRIBE MY CHANNEL                     "
-sleep 3
+sleep 5
 
 echo "Mengatur Docker dalam rootless mode..."
 sudo apt-get update
