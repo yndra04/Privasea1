@@ -29,8 +29,8 @@ read wallet_keystore_content
 
 # Membuat file wallet_keystore dan menulis isi yang dimasukkan oleh pengguna
 echo "$wallet_keystore_content" | sudo tee ~/privasea/config/wallet_keystore > /dev/null
-sleep 2  # Delay 2 detik
-
+sleep 1  # Delay 2 detik
+clear
 # Meminta input dari pengguna untuk KEYSTORE_PASSWORD
 echo "Please enter your KEYSTORE_PASSWORD:"
 read -s KEYSTORE_PASSWORD  # -s untuk menyembunyikan input password
