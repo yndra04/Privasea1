@@ -5,9 +5,6 @@ echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
 echo "               SUBSCRIBE MY CHANNEL                     "
 
-echo "Selamat datang! Skrip ini akan mengatur Docker untuk Anda dalam mode rootless."
-echo "Skrip ini akan menginstal Docker dalam rootless mode untuk keamanan yang lebih baik."
-
 # Langkah pertama: Instalasi Docker dalam rootless mode
 echo "Mengatur Docker dalam rootless mode..."
 sudo apt-get update
