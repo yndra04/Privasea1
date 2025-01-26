@@ -8,9 +8,6 @@ Minimum spec :
 2. copy this code :
 ```
 sudo rm -fr privasea.sh && sudo wget https://raw.githubusercontent.com/shareithub/Privasea/refs/heads/main/privasea.sh
-```
-and copy this :
-```
 chmod +x privasea.sh
 ./privasea.sh
 ```
