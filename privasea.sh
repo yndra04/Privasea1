@@ -3,7 +3,7 @@ echo "   ______ _____   ___  ____  __________  __ ____  _____ "
 echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
-echo "               SUBSCRIBE MY CHANNEL                     "
+echo "               PRIVASEA NODE                            "
 sleep 3
 
     echo "Mengatur Docker dalam rootless mode..."
@@ -52,7 +52,7 @@ sleep 3
 
 # Meminta input pengguna untuk wallet_keystore
 echo "Masukkan isi untuk file 'wallet_keystore':"
-read -p "Masukkan data wallet: " wallet_data
+read -sp "Masukkan data wallet: " wallet_data
 
 # Menulis data ke dalam file wallet_keystore
 echo "$wallet_data" > ~/privasea/config/wallet_keystore
