@@ -3,7 +3,7 @@ echo "   ______ _____   ___  ____  __________  __ ____  _____ "
 echo "  / __/ // / _ | / _ \/ __/ /  _/_  __/ / // / / / / _ )"
 echo " _\ \/ _  / __ |/ , _/ _/  _/ /  / /   / _  / /_/ / _  |"
 echo "/___/_//_/_/ |_/_/|_/___/ /___/ /_/   /_//_/\____/____/ "
-echo "               PRIVASEA NODE                            "
+echo "               SUBSCRIBE MY CHANNEL                     "
 sleep 3
 
 echo "Mengatur Docker dalam rootless mode..."
@@ -35,30 +35,6 @@ sleep 20
 echo "Creating Privasea directory..."
 sudo mkdir -p ~/privasea/config
 cd ~/privasea
-
-echo "Generating a new wallet keystore..."
-sudo docker run --rm -it -v "$HOME/privasea/config:/app/config" privasea/acceleration-node-beta:latest ./node-calc new_keystore
-echo "Please note down the node address and password displayed during this step."
-
-echo "Moving the generated keystore file..."
-sudo mv $HOME/privasea/config/UTC--* $HOME/privasea/config/wallet_keystore
-
-echo "Visit the Privanetix Dashboard to configure your node:"
-echo "🔹 Connect a wallet to receive rewards."
-echo "🔹 Enter the node address you noted earlier."
-echo "🔹 Set up the node name and commission (e.g., 1%)."
-echo "Then, click 'Set up my node.'"
-
-echo "Stopping the existing Privasea Privanetix Node if it is running..."
-docker stop privanetix-node || true
-
-echo "Removing the container and image..."
-docker rm privanetix-node || true  
-docker rmi privasea/acceleration-node-beta:latest || true  
-
-echo "Removing old wallet keystore..."
-cd ~/privasea/config
-sudo rm -fr wallet_keystore
 
 echo "Masukkan informasi keystore baru..."
 echo "Masukkan password untuk keystore: "
