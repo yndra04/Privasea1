@@ -8,6 +8,7 @@ sleep 3
 
     echo "Mengatur Docker dalam rootless mode..."
     sudo apt-get update
+    sudo apt install docker.io
     sudo apt-get install -y docker-ce-rootless-extras
     dockerd-rootless-setuptool.sh install
 
