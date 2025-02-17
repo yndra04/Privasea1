@@ -26,7 +26,7 @@ echo "Menunggu 3 detik..."
 sleep 3
 
 echo "Starting your Privasea Privanetix Node..."
-sudo docker run -d --name privanetix-node1 -v "$HOME/privasea1/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta:latest
+sudo docker run -d --name privanetix-node1 -v "$HOME/privasea1/config:/app/config" -e KEYSTORE_PASSWORD=$KEYSTORE_PASSWORD privasea/acceleration-node-beta
 sleep 5
 
 sudo docker restart privanetix-node1
